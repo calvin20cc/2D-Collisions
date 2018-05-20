@@ -1,0 +1,71 @@
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
+
+public class JCollisions extends JPanel{
+  public int intwidth = 10;
+  public int intheight = 10;
+  public int intstartx;
+  public int intstarty;
+  public int intendx;
+  public int intendy;
+  public int intPuck1X = 25;
+  public int intPuck1Y = 25;
+  public int intPuck2X = 50;
+  public int intPuck2Y = 50;
+  public int intCount;
+  public double dblVelocityX1;
+  public double dblVelocityY1;
+  public double dblVelocityX2;
+  public double dblVelocityY2;
+  public double dblVelocity1;
+  public double dblVelocity2;
+  public double dblRoundVel1;
+  public double dblRoundVel2;
+  public boolean blnrepaint = true;
+  // Constructor
+  public void paintComponent(Graphics g){
+    Graphics2D g2d = (Graphics2D)g;
+    // g2d.setColor(Color.WHITE);
+    g2d.clearRect(0, 0, 800, 600);
+    g2d.setColor(Color.BLACK);
+    intstartx = 0;
+    intstarty = 0;
+    intendx = 320;
+    intendy = 0;
+    for(intCount = 0; intCount < 32; intCount++){
+      g2d.drawLine(intstartx, intstarty, intendx, intendy);
+      intstarty = intstarty + intheight;
+      intendy = intendy + intheight;
+    }
+    intstartx = 0;
+    intstarty = 0;
+    intendx = 0;
+    intendy = 320;
+    for(intCount = 0; intCount < 32; intCount ++){
+      g2d.drawLine(intstartx, intstarty, intendx, intendy);
+      intstartx = intstartx + intheight;
+      intendx = intendx + intheight;
+    }
+    // Draw Pucks
+    g2d.setColor(Color.RED);
+    g2d.fillOval(intPuck1X, intPuck1Y, 50, 50);
+    g2d.setColor(Color.BLUE);
+    g2d.fillOval(intPuck2X, intPuck2Y, 50, 50);
+    // Calculations - puck 1 initial velocity
+    g2d.setColor(Color.RED);
+    dblVelocity1 = Math.sqrt(Math.pow(dblVelocityX1, 2)+Math.pow(dblVelocityY1, 2));
+    dblRoundVel1 = (Math.round(dblVelocity1*100.0)/100.0);
+    g2d.drawString(Double.toString(dblRoundVel1), 20, 20);
+    // Calculations - puck 2 initial velocity
+    g2d.setColor(Color.BLUE);
+    dblVelocity2 = Math.sqrt(Math.pow(dblVelocityX2, 2)+Math.pow(dblVelocityY2, 2));
+    dblRoundVel2 = (Math.round(dblVelocity2*100.0)/100.0);
+    g2d.drawString(Double.toString(dblRoundVel2), 50, 50);
+  }
+  public JCollisions(){
+    super();
+  }
+}
+  
